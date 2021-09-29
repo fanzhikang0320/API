@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <%- include('../templates/public-style.ejs') %>
+    <link rel="stylesheet" href="/stylesheets/edit.css">
+</head>
+<body>
+    <div class="layui-layout layui-layout-admin page-main">
+        <%- include('../templates/header.ejs', { userInfo }) %>
+        
+        <div class="layui-side layui-bg-black">
+          <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <%- include('../templates/navigation.template.ejs') %>
+          </div>
+        </div>
+        
+        <div class="layui-body">
+          <div class="layui-row main-container">
+              <form class="layui-form" id="articles-form" lay-filter="edit-form-filter">
+              
+                  <div class="layui-form-item layui-col-lg3">
+                      <lable class="layui-form-label">* 所属栏目</lable>
+                      <div class="layui-input-block">
+                          <select name="columns_id" lay-verify="required" id="columns-select">
+                              <option value="">请选择栏目</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">索引图</label>
+                      <div class="layui-input-block">
+                          <button class="layui-btn" type="button" id="upload-btn">
+                              <i class="layui-icon">&#xe67c;</i>上传图片
+                          </button>
+                      </div>
+                      <img src="" alt="" height="100px"  style="margin-left: 110px; margin-top: 15px; max-width: 500px; display: none" id="currentImage">
+                      
+                  </div>
+                  <div class="layui-form-item layui-col-lg5">
+      
+                      <label class="layui-form-label">* 主标题</label>
+                      <div class="layui-input-block">
+                          <input type="text" name="title" lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input">
+                      </div>
+                  </div>
+                  <div class="layui-form-item layui-col-lg5">
+      
+                      <label class="layui-form-label">副标题</label>
+                      <div class="layui-input-block">
+                          <input type="text" name="subtitle" placeholder="请输入文章副标题" autocomplete="off" class="layui-input">
+                      </div>
+                  </div>
+                  <div class="layui-form-item layui-col-lg5">
+                      <label class="layui-form-label">* 关键字</label>
+                      <div class="layui-input-block">
+                          <input type="text" name="keywords" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+                      </div>
+                  </div>
+                  <div class="layui-form-item layui-col-lg5">
+                      <label class="layui-form-label">文章摘要</label>
+                      <div class="layui-input-block">
+                          <textarea name="abstract" placeholder="请输入文章摘要" class="layui-textarea"></textarea>
+                      </div>
+                  </div>
+                  <div class="layui-form-item layui-col-lg9">
+                      <label class="layui-form-label">*内容</label>
+                      <div class="layui-input-block">
+                          <textarea name="content" id="editor"></textarea>
+                      </div>
+                  </div>
+                  <div class="layui-form-item layui-col-lg3">
+                      <label class="layui-form-label">作者</label>
+                      <div class="layui-input-block">
+                          <select name="author_id">
+                              <option value=""></option>
+                          </select>
+                      </div>
+                  </div>
+                  
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">发布日期</label>
+                      <div class="layui-input-block">
+                          <div class="layui-inline">
+                              <input type="text" name="date" class="layui-input" id="time-input">
+                          </div>
+                      </div>
+                  </div>
+                  
+                  <div class="layui-form-item">
+                      <div class="layui-input-block">
+                          <button class="layui-btn" type="button" lay-submit lay-filter="submitArticleDrafts">保存至草稿箱</button>
+                          <button class="layui-btn layui-btn-normal" type="button" lay-submit lay-filter="submitArticle">立即发布</button>
+                          <button class="layui-btn layui-btn-primary reset-btn" type="reset">重置</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+        </div>
+        
+        <div class="layui-footer">
+          <!-- 底部固定区域 -->
+          底部固定区域
+        </div>
+      </div>
+      <%- include('../templates/public-js.ejs') %>
+      <script src="/js/ckeditor/ckeditor.js"></script>
+      <script src="/js/editor.js"></script>
+      
+</body>
+</html>

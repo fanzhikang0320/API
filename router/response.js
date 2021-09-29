@@ -1,16 +1,19 @@
 
 module.exports = {
-    success: (res,data,msg="success",status=200) => {
+    success: (res,data,msg="success",field={}, status=200) => {
         res.status(status).send({
             code: 1,
             msg: msg,
-            data: data
+            ...field,
+            data: data,
+            status: 'success'
         })
     },
     fail: (res,code,msg="fail",status=200) => {
         res.status(status).send({
             code: code,
-            msg: msg
+            msg: msg,
+            status: 'fail'
         })
     }
 }
