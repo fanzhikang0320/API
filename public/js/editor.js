@@ -4,6 +4,8 @@ const config = {
     extraPlugins: 'autogrow, image2',
     autoGrow_maxHeight: 1000, // 自动增长的最大高度
     autoGrow_minHeight: 600, // 自动增长的最小高度
+    filebrowserImageBrowseUrl: '/uploader',
+    filebrowserImageUploadUrl: '/uploader'
 }
 
 CKEDITOR.replace('content', config);

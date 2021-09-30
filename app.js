@@ -25,7 +25,7 @@ app.use(sassMiddleware({
     sourceMap: false,
     prefix: '/stylesheets'
 }));
-const {signRouter, smsRouter, websiteRouter, pageRouter, uploadRouter, columnsRouter, articleRouter, authorRouter } = require('./router');
+const {signRouter, smsRouter, websiteRouter, pageRouter, uploadRouter, columnsRouter, articleRouter, authorRouter, ckeditorRouter } = require('./router');
 const authMiddleware = require('./middleware/auth');
 
 // app.use(cors);
@@ -44,6 +44,7 @@ app.use('/website', websiteRouter);
 app.use('/upload', uploadRouter);
 app.use('/columns', columnsRouter )
 app.use('/author', authorRouter);
+app.use('/uploader',ckeditorRouter)
 app.use('/',authMiddleware,pageRouter);
 
 // 渲染404页面
