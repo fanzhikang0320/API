@@ -1,4 +1,7 @@
 
+let isUpdate = false;
+let columns_id = '';
+
 layui.use(['layer','form', 'table'], function(){
 
     let form = layui.form;
@@ -22,7 +25,7 @@ layui.use(['layer','form', 'table'], function(){
   </form>`
     // 点击添加栏目
     $('.add-columns-btn').on('click', function () {
-
+        isUpdate = false;
         layer.open({
             type: 1,
             title: '添加栏目',
@@ -30,34 +33,14 @@ layui.use(['layer','form', 'table'], function(){
         })
     })
 
-    // 监听表单提交
-    form.on('submit(columns-form-filter)', function (data) {
-        let title = data.field.title;
-        let website_id = localStorage.getItem('checkWebsite');
-        $.ajax({
-            type: 'POST',
-            url: '/columns/create',
-            data: {
-                title: title,
-                website_id: website_id
-            },
-            success: (res) => {
-                if (res.status === 'success') {
-                    layer.msg('添加成功', { icon: 1 })
-                }
-            },
-            fail: (err) => {
-                layer.msg(err, { icon: 2 })
-            }
-        })
-    })
+    
 
 
     let url = '/columns/all?website_id=' + localStorage.getItem('checkWebsite');
     // 渲染表格
     table.render({
         elem: '#columns-table',
-        height: 315,
+        width: 886,
         url: url,
         page: false,
         loading: true,
@@ -114,9 +97,8 @@ layui.use(['layer','form', 'table'], function(){
             })
         } else if (event === 'edit') {
             // 点击编辑
-
-            let columns_id = data.columns_id;
-
+            isUpdate = true;
+            columns_id = data.columns_id;
             layer.open({
                 type: 1,
                 title: '更新栏目',
@@ -124,32 +106,59 @@ layui.use(['layer','form', 'table'], function(){
                 area: 'auto',
                 move: false
             })
-            console.log(data);
             form.val('columns-form', {
                 title: data.title
             })
-
-            form.on('submit(columns-form-filter)', function (data) {
-                let title = data.field.title;
-        
-                $.ajax({
-                    type: 'PUT',
-                    url: '/columns/update',
-                    data: {
-                        title: title,
-                        columns_id: columns_id
-                    },
-                    success: (res) => {
-                        if (res.status === 'success') {
-                            layer.msg('更新成功', { icon: 1 })
-                        }
-                    },
-                    fail: (err) => {
-                        layer.msg(err, { icon: 2 })
-                    }
-                })
-            })
-
         }
+    })
+
+    // 监听表单提交
+    form.on('submit(columns-form-filter)', function (data) {
+        let title = data.field.title;
+        let website_id = localStorage.getItem('checkWebsite');
+
+        if (isUpdate) {
+
+            $.ajax({
+                type: 'PUT',
+                url: '/columns/update',
+                data: {
+                    title: title,
+                    columns_id: columns_id
+                },
+                success: (res) => {
+                    if (res.status === 'success') {
+                        isUpdate = false;
+                        layer.msg('更新成功', { icon: 1 })
+                    } else {
+                        layer.msg('更新失败', { icon: 2 })
+                    }
+                },
+                fail: (err) => {
+                    layer.msg(err, { icon: 2 })
+                }
+            })
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: '/columns/create',
+                data: {
+                    title: title,
+                    website_id: website_id
+                },
+                success: (res) => {
+                    if (res.status === 'success') {
+                        layer.msg('添加成功', { icon: 1 })
+                    } else {
+                        layer.msg('添加失败', { icon: 2 })
+                    }
+                },
+                fail: (err) => {
+                    layer.msg(err, { icon: 2 })
+                }
+            })
+        }
+
+        
     })
 })

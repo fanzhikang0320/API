@@ -76,7 +76,7 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
             url: '/articles/find?article_id=' + editArticleID,
             success: (res) => {
                 if (res.status === 'success') {
-                    let { columns_id, content, date, introduce, keywords, main_picture, state, subtitle, title, website_id } = res.data;
+                    let { columns_id, content, date, introduce, keywords, main_picture, state, subtitle, title, website_id, author_id } = res.data;
                     
                     form.val('edit-form-filter', {
                         columns_id: columns_id,
@@ -84,12 +84,17 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
                         title: title,
                         subtitle: subtitle,
                         date: date,
-                        abstract: introduce
+                        abstract: introduce,
+                        author_id: author_id
                     });
                     src = main_picture;
                     isShowImage(src);
-                    
-                    CKEDITOR.instances.editor.setData(content);
+
+                    CKEDITOR.instances.editor.setData(content, {
+                        callback: () => {
+                            
+                        }
+                    });
                     laydate.render({
                         elem: '#time-input',
                         value: formatTime(date)
@@ -148,6 +153,8 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
                     success: (res) => {
                         if (res.status === 'success') {
                             resetForm();
+                            localStorage.removeItem('edit_article_id');
+                            isUpdate = false; //状态重置为上传状态
                             layer.msg('更新成功！', { icon: 1 });
 
                         } else {
@@ -179,14 +186,26 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
             }
     }
 
+    //重置表单
+    form.on('submit(resetArticle)', function () {
+        resetForm();
+    })
+
     function resetForm () {
-        isUpdate = false; //状态重置为上传状态
+        
         src = '';
         isShowImage();
-        $('.reset-btn').trigger('click');
+        form.val('edit-form-filter', {
+            columns_id: '',
+            keywords: '',
+            title: '',
+            subtitle: '',
+            abstract: '',
+            author_id: ''
+        });
         CKEDITOR.instances.editor.setData('')
         form.render();
-        localStorage.removeItem('edit_article_id');
+        
         laydate.render({
             elem: '#time-input',
             value: formatTime(new Date().getTime()),
@@ -228,8 +247,25 @@ selectColumns();
 
 // 查询该网站下作者
 function selectAuthor() {
+    $.ajax({
+        type: 'GET',
+        url: '/author/findall',
+        success: (res) => {
+            if (res.status === 'success' && res.data.length > 0) {
+                res.data.forEach(ele => {
+                    $('#author-select').append(new Option(ele.name, ele.author_id))
+                })
 
+                layui.form.render('select')
+            }
+        },
+        fail: (err) => {
+            layer.msg(err, { icon: 2 })
+        }
+        
+    })
 }
+selectAuthor();
 // 监听当前页面离开
 window.onbeforeunload=function(e){    
     window.localStorage.removeItem('edit_article_id');

@@ -67,15 +67,15 @@
                       </div>
                   </div>
                   <div class="layui-form-item layui-col-lg9">
-                      <label class="layui-form-label">*内容</label>
+                      <label class="layui-form-label">* 内容</label>
                       <div class="layui-input-block">
                           <textarea name="content" id="editor"></textarea>
                       </div>
                   </div>
                   <div class="layui-form-item layui-col-lg3">
-                      <label class="layui-form-label">作者</label>
+                      <label class="layui-form-label">* 作者</label>
                       <div class="layui-input-block">
-                          <select name="author_id">
+                          <select name="author_id" id="author-select" lay-verify="required">
                               <option value=""></option>
                           </select>
                       </div>
@@ -94,7 +94,7 @@
                       <div class="layui-input-block">
                           <button class="layui-btn" type="button" lay-submit lay-filter="submitArticleDrafts">保存至草稿箱</button>
                           <button class="layui-btn layui-btn-normal" type="button" lay-submit lay-filter="submitArticle">立即发布</button>
-                          <button class="layui-btn layui-btn-primary reset-btn" type="reset">重置</button>
+                          <button class="layui-btn layui-btn-primary reset-btn" lay-submit lay-filter="resetArticle" >重置</button>
                       </div>
                   </div>
               </form>
@@ -106,8 +106,9 @@
           底部固定区域
         </div>
       </div>
-      <%- include('../templates/public-js.ejs') %>
       <script src="/js/ckeditor/ckeditor.js"></script>
+      <%- include('../templates/public-js.ejs') %>
+      
       <script src="/js/editor.js"></script>
       
 </body>

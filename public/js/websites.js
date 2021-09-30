@@ -18,7 +18,7 @@ layui.use(['layer', 'table', 'form'], function () {
     let table = layui.table;
     table.render({
         elem: '#website-table',
-        height: '315',
+        width: 886,
         url: '/website/',
         page: true,
         loading: true,

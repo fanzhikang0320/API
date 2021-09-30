@@ -5,8 +5,8 @@ const router = express.Router();
 const { success, fail } = require('../response');
 const { createColumns, updateColumns, selectAllColumns } = require('../../service/columns.service');
 const changeParmas = require('../../utils/changeParams');
-
-router.post('/create', async (req, res) => {
+const authMiddleware = require('../../middleware/auth');
+router.post('/create', authMiddleware, async (req, res) => {
     let { website_id, title } = req.body;
 
     let results = await createColumns(website_id, title);
@@ -18,7 +18,7 @@ router.post('/create', async (req, res) => {
     }
 })
 
-router.put('/update', async (req, res) => {
+router.put('/update',authMiddleware, async (req, res) => {
     let { columns_id } = req.body;
     let params = changeParmas('columns_id', req.body);
 

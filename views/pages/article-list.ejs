@@ -34,6 +34,12 @@
   <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
 </script>
 <script type="text/html" id="columns-tr">{{d.public_api_column.title}}</script>
+<script type="text/html" id="author-tr">
+  {{#  if(!d.public_api_author || !d.public_api_author.name){  }}
+    
+  {{#  } else { }}
+    {{d.public_api_author.name}}
+  {{#  } }}</script>
 <%- include('../templates/public-js.ejs') %>
 <script>
   let website_id = localStorage.getItem('checkWebsite');
@@ -66,7 +72,7 @@
           field: 'keywords', title: 'SEO关键词', width: 200
         },
         {
-          field: 'author_id', title: '作者', width: 130, align: 'center'
+          field: 'author_id', title: '作者', width: 130, align: 'center', templet: '#author-tr'
         },
         {
           field: 'utime', title: '发布时间', width: 130, align: 'center'
@@ -79,6 +85,7 @@
         }
       ]],
       parseData: (res) => {
+        console.log(res);
         let data = {};
         if (res.status === 'fail') {
           data = {

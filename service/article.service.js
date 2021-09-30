@@ -3,6 +3,7 @@ const sequelize = require('../models/db');
 const articleModel = require('../models/article');
 const columnsModel = require('../models/columns');
 const websiteModel = require('../models/website');
+const authorModel = require('../models/author');
 const { sqlLogger } = require('../common/logger');
 /**
  * 创建一篇文章
@@ -114,6 +115,12 @@ const selectAllArticle = async (website_id, page=1, limit=20, status) => {
                     model: websiteModel,
                     attributes: [
                         'website'
+                    ]
+                },
+                {
+                    model: authorModel,
+                    attributes: [
+                        'name'
                     ]
                 }
                 ],

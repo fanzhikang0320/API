@@ -3,8 +3,8 @@ const websiteRouter = require('express').Router();
 const { createWebsite, updateWebsite, selectWebsite, selectAllWebsite } = require('../../service/website.service')
 
 const { success, fail } = require('../response');
-
-websiteRouter.post('/add', async (req, res) => {
+const authMiddleware = require('../../middleware/auth');
+websiteRouter.post('/add',authMiddleware, async (req, res) => {
     let { website } = req.body;
 
     let results = await createWebsite(website);
@@ -17,7 +17,7 @@ websiteRouter.post('/add', async (req, res) => {
 
 })
 
-websiteRouter.put('/update', async (req, res) => {
+websiteRouter.put('/update',authMiddleware, async (req, res) => {
     const { website_id, website } = req.body;
     
     let results = await updateWebsite(website_id, { website });

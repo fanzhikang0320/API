@@ -6,6 +6,7 @@ const websiteRouter = require('./privateApi/website');
 const uploadRouter = require('./openApi/upload');
 const columnsRouter = require('./privateApi/columns');
 const articleRouter = require('./privateApi/articles');
+const authorRouter = require('./privateApi/author')
 module.exports = {
     signRouter,
     smsRouter,
@@ -13,5 +14,6 @@ module.exports = {
     websiteRouter,
     uploadRouter,
     columnsRouter,
-    articleRouter
+    articleRouter,
+    authorRouter
 }

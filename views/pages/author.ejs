@@ -19,6 +19,10 @@
         
         <div class="layui-body">
           <div class="layui-row main-container">
+            <div class="layui-row">
+              <button class="layui-btn add-author-btn"><i class="layui-icon layui-icon-addition"></i>添加作者</button>
+            </div>
+            <table id="author-table" lay-filter="author-table-filter"></table>
           </div>
         </div>
         
@@ -27,8 +31,18 @@
           底部固定区域
         </div>
       </div>
-      
+      <script type="text/html" id="handle-bar">
+        <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+      </script>
+      <script type="text/html" id="avatar-tr">
+        {{#  if(d.avatar != '' ){ }}
+        <img src="{{d.avatar}}" alt="avatar" style="height: 100%;">
+      {{#  } else { }}
+        <p style="text-align: center;">暂无图片</p>
+      {{#  } }}</script>
       <%- include('../templates/public-js.ejs') %>
+      <script src="/js/author.js"></script>
       
 </body>
 </html>

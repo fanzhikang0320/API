@@ -5,7 +5,7 @@ const router = express.Router();
 const { success } = require('../response');
 
 const uploadMiddle = require('../../middleware/uploadMiddleware');
-
+const pathPrefix = process.env.PATH_PREFIX ? process.env.PATH_PREFIX : '';
 router.post('/', uploadMiddle, (req, res) => {
     let filesArray = req.files;
     let pathArray = [];
@@ -14,7 +14,7 @@ router.post('/', uploadMiddle, (req, res) => {
         let { filename, mimetype, size } = file;
 
         let data = {
-            src: '/upload/images/' + filename,
+            src: pathPrefix + '/upload/images/' + filename,
             size: size,
             mimetype: mimetype
         }

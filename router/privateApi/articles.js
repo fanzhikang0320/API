@@ -6,6 +6,9 @@ const { selectOneColumns } = require('../../service/columns.service');
 const { createArticle, updateArticle, selectAllArticle, selectArticleByColumnsID, selectArticleByArticleID, deleteArticle } = require('../../service/article.service');
 const { success, fail } = require('../response');
 const changeParams = require('../../utils/changeParams');
+
+const authMiddleware = require('../../middleware/auth');
+
 const middleware = async (req, res, next) => {
 
     let {columns_id, website_id} = req.body;
@@ -94,7 +97,7 @@ router.get('/findbycolumns', async (req, res) => {
 /**
  * 创建一篇文章
  */
-router.post('/create', middleware, async (req, res) => {
+router.post('/create',authMiddleware, middleware, async (req, res) => {
     if (req.body.state != 'fail' && req.body.state != 'pending' && req.body.state != 'done') {
         req.body.state = 'done'
     }
@@ -109,7 +112,7 @@ router.post('/create', middleware, async (req, res) => {
 /**
  * 更新一篇文章
  */
-router.put('/update',  async (req, res) => {
+router.put('/update', authMiddleware,  async (req, res) => {
     let { article_id } = req.body;
     let params = changeParams('article_id', req.body);
     let results = await updateArticle(article_id, params);
@@ -128,7 +131,7 @@ router.put('/update',  async (req, res) => {
 /**
  * 删除一篇文章
  */
-router.delete('/delete', async (req, res) => {
+router.delete('/delete', authMiddleware, async (req, res) => {
     let { article_id } = req.body;
 
     let results = await deleteArticle(article_id);
