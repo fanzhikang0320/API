@@ -67,6 +67,10 @@ layui.use(['element', 'layer', 'util', 'form'], function(){
       
       
     });
+
+    if (!localStorage.getItem('checkWebsite')) {
+      layer.msg('请选择一个网站', { icon: 5 })
+    }
   });
 
   function getCookie(name) {
@@ -101,19 +105,4 @@ function formatTime(time) {
 }
 
 
-
-// let headerHeight = $('.layui-header.header-container').height();
-// let footerHeight = $('.layui-footer.footer-container').height();
-// let screenHeight = $(window).height();
-
-// $(window).on('resize',function () {
-//   $(this).height();
-// })
-
-// let height = screenHeight - headerHeight - footerHeight;
-// // $('.main-container').height()
-
-// $('.layui-table-view').css({
-//   height: height
-// })
 

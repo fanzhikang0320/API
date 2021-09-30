@@ -44,7 +44,7 @@ app.use('/website', websiteRouter);
 app.use('/upload', uploadRouter);
 app.use('/columns', columnsRouter )
 app.use('/author', authorRouter);
-app.use('/uploader',ckeditorRouter)
+app.use('/uploader',ckeditorRouter);
 app.use('/',authMiddleware,pageRouter);
 
 // 渲染404页面

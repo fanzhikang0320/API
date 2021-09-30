@@ -3,6 +3,27 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
+const marked = require('marked');
+
+
+const fs = require('fs');
+
+function renderMD(req, res, templatePath, filename, title) {
+    let userInfo = req.headers.userInfo;
+    let str = '';
+    let filePath = path.resolve(__dirname, '../../documents/' + filename)
+
+    fs.readFile(filePath, (err, data) => {
+        if (err) {
+            str = err;
+        } else {
+            str = marked(data.toString());
+            console.log(str);
+        }
+        res.render(templatePath, { title: title, userInfo, str })
+    })
+}
+
 router.get('/',(req, res) => {
     let userInfo = req.headers.userInfo;
     res.render('index',{ title: 'API', userInfo })
@@ -42,17 +63,19 @@ router.get('/article-deleted', (req, res) => {
 })
 
 router.get('/documents/email', (req, res) => {
-    let userInfo = req.headers.userInfo;
-    res.render('./documents/email', { title: '邮件API文档 - Open API', userInfo })
+    
+    
+    renderMD(req, res, './documents/email', 'Email.md', '邮件API文档 - Open API')
+    
 })
 router.get('/documents/article', (req, res) => {
-    let userInfo = req.headers.userInfo;
-    res.render('./documents/article', { title: '文章API文档 - Open API', userInfo })
+   
+    renderMD(req,res, './documents/article','Articles.md', '文章API文档 - Open API' )
 })
 
 router.get('/documents/upload', (req, res) => {
-    let userInfo = req.headers.userInfo;
-    res.render('./documents/upload', { title: '上传API文档 - Open API', userInfo })
+    
+    res.render(req, res, './documents/upload','Upload.md', '上传API文档 - Open API')
 })
 
 router.get('/websites', (req, res) => {
@@ -60,10 +83,7 @@ router.get('/websites', (req, res) => {
     res.render('websites', { title: '我的网站 - Open API', userInfo })
 })
 
-router.get('/setting', (req, res) => {
-    let userInfo = req.headers.userInfo;
-    res.render('setting', { title: '设置 - Open API', userInfo })
-})
+
 
 router.get('/columns', (req, res) => {
     let userInfo = req.headers.userInfo;
