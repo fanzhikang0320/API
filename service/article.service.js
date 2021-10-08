@@ -103,7 +103,7 @@ const selectAllArticle = async (website_id, page=1, limit=20, status) => {
         const results = await sequelize.transaction(async (t) => {
             const ins = await articleModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version']
+                    exclude: ['version','content']
                 },
                 include: [{
                     model: columnsModel,
@@ -154,7 +154,7 @@ const selectArticleByColumnsID = async (columns_id, page=1, limit=20, status) =>
         const results = await sequelize.transaction(async (t) => {
             const ins = await articleModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version']
+                    exclude: ['version','content']
                 },
 
                 offset: (page - 1) * limit,

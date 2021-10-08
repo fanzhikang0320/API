@@ -18,7 +18,6 @@ function renderMD(req, res, templatePath, filename, title) {
             str = err;
         } else {
             str = marked(data.toString());
-            console.log(str);
         }
         res.render(templatePath, { title: title, userInfo, str })
     })
@@ -26,7 +25,7 @@ function renderMD(req, res, templatePath, filename, title) {
 
 router.get('/',(req, res) => {
     let userInfo = req.headers.userInfo;
-    res.render('index',{ title: 'API', userInfo })
+    res.render('index',{ title: 'API', userInfo });
 })
 
 router.get('/login',(req, res) => {
@@ -75,7 +74,7 @@ router.get('/documents/article', (req, res) => {
 
 router.get('/documents/upload', (req, res) => {
     
-    res.render(req, res, './documents/upload','Upload.md', '上传API文档 - Open API')
+    renderMD(req, res, './documents/upload','Upload.md', '上传API文档 - Open API')
 })
 
 router.get('/websites', (req, res) => {
