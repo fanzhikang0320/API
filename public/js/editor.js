@@ -8,7 +8,7 @@ const config = {
     filebrowserImageUploadUrl: '/uploader'
 }
 
-CKEDITOR.replace('content', config);
+CKEDITOR.replace('editor', config);
 
 // CKEDITOR.config.UploadUrl = '/upload'
 
@@ -25,7 +25,7 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
         elem: '#upload-btn',
         url: '/upload', //上传接口
         accept: 'images', // 允许上传图片文件类型
-        acceptMime: 'image/jpg, image/png, image/svg+xml, image/webp, image/gif, image/jpeg, image/x-icon',
+        acceptMime: 'image/*',
         size: 10 * 1024, //最大允许上传的文件大小 为 10Mb
         multiple: false, // 只允许单文件
         field: 'photos', // 文件域的字段名
@@ -93,8 +93,8 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
                     isShowImage(src);
 
                     CKEDITOR.instances.editor.setData(content, {
-                        callback: () => {
-                            
+                        callback: function () {
+                            this.checkDirty(); 
                         }
                     });
                     laydate.render({

@@ -25,7 +25,7 @@ layui.use(['layer', 'table', 'form'], function () {
         limit: 20,
         cols: [[
             {
-                title: '序号', width: 80, type: 'numbers', sort: true
+                title: '序号', width: 80, type: 'numbers'
             },
             {
                 field: 'website_id', title: 'ID', width: 150
@@ -34,13 +34,24 @@ layui.use(['layer', 'table', 'form'], function () {
                 field: 'website', title: '网站域名', width: 200
             },
             {
-                field: 'ctime', title: '添加日期', width: 200, sort: true
+                field: 'ctime', title: '添加日期', width: 200, sort: true, align: 'center'
             },
             {
                 width: 250, title: '操作', align: 'center', toolbar: '#handle-bar'
             }
         ]],
         parseData: (res) => {
+            if (res.status === 'fail') {
+
+                return {
+                    "code": 0,
+                    "count": 0,
+                    "data": []
+                }
+            }
+            res.data.rows.forEach(ele => {
+                ele.ctime = formatTime(ele.ctime);
+            })
             return {
                 "code": 0,
                 "count": res.data.count,

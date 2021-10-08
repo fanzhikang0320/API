@@ -28,13 +28,10 @@ app.use(sassMiddleware({
 const {signRouter, smsRouter, websiteRouter, pageRouter, uploadRouter, columnsRouter, articleRouter, authorRouter, ckeditorRouter } = require('./router');
 const authMiddleware = require('./middleware/auth');
 
-// app.use(cors);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname,'public')));
-// app.use(express.favicon(path.resolve(__dirname, './public/images/favicon.ico')))
-// app.use(auth)
 
 
 app.use('/sign',signRouter);

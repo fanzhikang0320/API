@@ -59,7 +59,7 @@ layui.use(['layer','form', 'table'], function(){
             },
             
             {
-                field: 'ctime', title: '创建时间', width: 200, sort:true
+                field: 'ctime', title: '创建时间', width: 200, sort:true, align: 'center'
             },
             {
                 title: '操作', align: 'center', toolbar: '#handle-bar', width: 250
@@ -74,6 +74,9 @@ layui.use(['layer','form', 'table'], function(){
                     "data": []
                 }
             }
+            res.data.forEach(ele => {
+                ele.ctime = formatTime(ele.ctime)
+            });
             return {
                 "code": 0,
                 "count": res.data.length,
