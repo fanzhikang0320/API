@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const path = require('path');
 require(path.resolve(__dirname, './models/index'));
-const cors = require('./middleware/cors');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
@@ -15,7 +15,7 @@ const sassMiddleware = require('node-sass-middleware');
 
 app.set('views', path.join(__dirname, 'views/pages'));
 app.set('view engine','ejs');
-
+app.use(cors())
 // 注意：node-sass-middleware必须放在express.static前
 app.use(sassMiddleware({
     src: path.join(__dirname, 'public/scss'),

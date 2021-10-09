@@ -1,5 +1,6 @@
 // 编辑器配置
 const config = {
+    setReadyOnly: false,
     removePlugins: 'easyimage',
     extraPlugins: 'autogrow, image2',
     autoGrow_maxHeight: 1000, // 自动增长的最大高度
@@ -92,11 +93,15 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
                     src = main_picture;
                     isShowImage(src);
 
-                    CKEDITOR.instances.editor.setData(content, {
-                        callback: function () {
-                            this.checkDirty(); 
+                    // 解决数据回显问题
+                    let timer = setInterval(() => {
+                        if (CKEDITOR.instances.editor.status == 'ready') {
+                            CKEDITOR.instances.editor.setData(content);
+                            clearInterval(timer)
                         }
-                    });
+                    },100)
+                    
+                    
                     laydate.render({
                         elem: '#time-input',
                         value: formatTime(date)
