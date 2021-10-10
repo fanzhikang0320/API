@@ -5,8 +5,12 @@ const path = require('path');
 
 const marked = require('marked');
 
-
 const fs = require('fs');
+const hljs = require('highlight.js');
+
+marked.setOptions({
+    highlight: (code) => hljs.highlightAuto(code).value
+})
 
 function renderMD(req, res, templatePath, filename, title) {
     let userInfo = req.headers.userInfo;
@@ -19,6 +23,7 @@ function renderMD(req, res, templatePath, filename, title) {
         } else {
             str = marked(data.toString());
         }
+
         res.render(templatePath, { title: title, userInfo, str })
     })
 }
