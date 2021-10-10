@@ -23,8 +23,14 @@ nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
 img{max-width:100%;}
 /*end reset*/
 /****-----start-body----****/
+html {
+	width: 100%;
+	height: 100%;
+}
 body{
-	background: url(../images/bg.jpeg) no-repeat center center/cover;
+	width: 100%;
+	height: 100%;
+	background: url(../images/bg.jpeg) no-repeat center center/100% 100%;
 }
 .wrap{
 	margin: 0 auto;
