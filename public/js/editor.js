@@ -94,13 +94,10 @@ layui.use(['form', 'laydate', 'upload', 'layer'], function() {
                     isShowImage(src);
 
                     // 解决数据回显问题
-                    let timer = setInterval(() => {
-                        if (CKEDITOR.instances.editor.status == 'ready') {
-                            CKEDITOR.instances.editor.setData(content);
-                            clearInterval(timer)
-                        }
-                    },100)
                     
+                    CKEDITOR.instances.editor.on('instanceReady', () => {
+                        CKEDITOR.instances.editor.setData(content);
+                    })
                     
                     laydate.render({
                         elem: '#time-input',
