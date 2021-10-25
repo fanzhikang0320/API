@@ -6,6 +6,7 @@ const { success } = require('../response');
 
 const uploadMiddle = require('../../middleware/uploadMiddleware');
 const pathPrefix = process.env.PATH_PREFIX ? process.env.PATH_PREFIX : '';
+
 router.post('/', uploadMiddle, (req, res) => {
     let filesArray = req.files;
     let pathArray = [];
@@ -21,6 +22,7 @@ router.post('/', uploadMiddle, (req, res) => {
 
         pathArray.push(data)
     })
+
     
     success(res, pathArray, '上传成功')
 })

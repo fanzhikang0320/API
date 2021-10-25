@@ -18,7 +18,7 @@ layui.use(['layer','form', 'table'], function(){
     <div class="layui-form-item" style="margin: 15px 0">
       <div class="layui-input-block">
         
-        <button class="layui-btn" lay-submit lay-filter="columns-form-filter">立即提交</button>
+        <button class="layui-btn" type="button" lay-submit lay-filter="columns-form-filter">立即提交</button>
         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
       </div>
     </div>
@@ -119,7 +119,6 @@ layui.use(['layer','form', 'table'], function(){
     form.on('submit(columns-form-filter)', function (data) {
         let title = data.field.title;
         let website_id = localStorage.getItem('checkWebsite');
-
         if (isUpdate) {
 
             $.ajax({
