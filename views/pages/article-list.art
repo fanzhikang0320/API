@@ -1,0 +1,14 @@
+{{extend '../layouts/theme'}}
+
+{{block 'page'}}
+<table id="article-list-table" lay-filter="articleListFilter"></table>
+<script type="text/html" id="handle-bar">
+  <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+{{/block}}
+
+
+{{block 'script'}}
+<script src="/js/articleList.js"></script>
+{{/block}}

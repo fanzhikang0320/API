@@ -1,0 +1,13 @@
+{{extend '../layouts/theme'}}
+
+{{block 'page'}}
+<table id="deleted-table" lay-filter="deleted-table-filter"></table>
+<script type="text/html" id="handle-bar">
+  <a class="layui-btn layui-btn-sm" lay-event="submit">恢复</a>
+  <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">清理</a>
+</script>
+{{/block}}
+
+{{block 'script'}}
+<script src="/js/articleDeleted.js"></script>
+{{/block}}

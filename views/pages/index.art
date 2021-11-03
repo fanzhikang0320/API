@@ -1,0 +1,14 @@
+{{extend '../layouts/theme'}}
+
+{{block 'page'}}
+
+This is Home page
+
+{{/block}}
+
+{{block 'script'}}
+<script>
+  // window.location.replace('/article-list');
+</script>
+
+{{/block}}

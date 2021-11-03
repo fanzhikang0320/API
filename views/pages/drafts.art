@@ -1,0 +1,15 @@
+{{extend '../layouts/theme'}}
+
+{{block 'page'}}
+<table id="drafts-table" lay-filter="drafts-table-filter"></table>
+<script type="text/html" id="handle-bar">
+  <a class="layui-btn layui-btn-sm" lay-event="submit">发布</a>
+  <a class="layui-btn layui-btn-normal layui-btn-sm" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+{{/block}}
+
+{{block 'script'}}
+<script src="/js/drafts.js"></script>
+
+{{/block}}

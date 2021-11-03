@@ -1,0 +1,18 @@
+{{extend '../layouts/theme'}}
+
+
+{{block 'page'}}
+<div class="layui-row">
+  <button class="layui-btn add-columns-btn"><i class="layui-icon layui-icon-addition"></i>添加栏目</button>
+</div>
+<table class="layui-table" id="columns-table" lay-filter="columns"></table>
+<script type="text/html" id="handle-bar">
+  <a class="layui-btn layui-btn-sm" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-sm" lay-event="del">删除</a>
+</script>
+{{/block}}
+
+{{block 'script'}}
+<script src="/js/columns.js"></script>
+
+{{/block}}

@@ -1,0 +1,8 @@
+{{extend '../../layouts/document'}}
+
+
+{{block 'page'}}
+
+<%- str %>
+
+{{/block}}

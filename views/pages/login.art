@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
+    
+</head>
+
+<body>
+    <!--SIGN UP-->
+    <h1>OPEN API 登录</h1>
+    <div class="login-form">
+        <div class="close"> </div>
+        <div class="head-info">
+            <label class="lbl-1"> </label>
+            <label class="lbl-2"> </label>
+            <label class="lbl-3"> </label>
+        </div>
+        <div class="clear"> </div>
+        <div class="avtar">
+            <img src="/upload/images/avatar.png" style="width: 70px; border-radius: 12px;">
+        </div>
+        <form>
+            <input type="text" class="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
+            <div class="key">
+                <input class="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+            </div>
+        </form>
+        <div class="signin">
+            <input type="submit" value="Login">
+        </div>
+    </div>
+    <script src="/js/jquery-2.2.4.min.js"></script>
+    <script src="/layui/layui.js"></script>
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

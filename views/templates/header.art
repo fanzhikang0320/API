@@ -1,0 +1,31 @@
+<div class="layui-header header-container">
+    <div class="layui-logo layui-hide-xs layui-bg-black">
+      <img src="/images/logo.png" alt="Open API" style="width: 30px; border-radius: 5px; margin-right: 10px;">
+      <strong style="font-weight: bold;">API</strong>
+    </div>
+    <div class="layui-form select-container layui-col-lg2">
+      <div class="layui-form-item">
+          <select name="website" id="websiteSelect" lay-filter="selectWebsite">
+              <option value="">请选择一个网站</option>
+            </select> 
+      </div>
+       
+  </div>
+    <ul class="layui-nav layui-layout-right">
+      <li class="layui-nav-item layui-hide layui-show-md-inline-block">
+        <a href="javascript:;">
+          <img src=<%= userInfo.avatar %> class="layui-nav-img">
+          <%= userInfo.nickname %>
+        </a>
+        <dl class="layui-nav-child">
+          <dd><a href="/websites">我的网站</a></dd>
+          <dd><a href="javascript:;" class="signOutBtn">退出登录</a></dd>
+        </dl>
+      </li>
+      <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+        <a href="javascript:;">
+          <i class="layui-icon layui-icon-more-vertical"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
