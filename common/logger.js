@@ -9,14 +9,14 @@ log4js.configure({
         sql: {
             type: 'dateFile',
             keepFileExt: true, //保持 文件后缀为 log
-            filename: path.resolve(__dirname,'../logs','sql','SQL.log'),
+            filename: path.resolve(__dirname, '../logs', 'sql', 'SQL.log'),
             pattern: '.yyyy-MM-dd',
             maxLogSize: 1024 * 1024,//文件最大字节数
             daysToKeep: 3, // 保存 3 天内的日志， 设置为0 永久保存
             layout: {
                 //配置输出格式
                 type: 'pattern',
-                pattern: "[%d{yyyy-MM-dd hh:mm:ss}] [%p] : %m%n" 
+                pattern: "[%d{yyyy-MM-dd hh:mm:ss}] [%p] : %m%n"
             }
         },
         default: {
@@ -24,7 +24,7 @@ log4js.configure({
             keepFileExt: true,
             maxLogSize: 1024 * 1024,
             daysToKeep: 3,
-            filename: path.resolve(__dirname,'../logs','default','DEFAULT.log'),
+            filename: path.resolve(__dirname, '../logs', 'default', 'DEFAULT.log'),
             pattern: '.yyyy-MM-dd',
             layout: {
                 type: 'pattern',

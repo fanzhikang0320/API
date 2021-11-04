@@ -1,8 +1,8 @@
-const { DataTypes, Sequelize, Deferrable  } = require('sequelize');
+const { DataTypes, Sequelize, Deferrable } = require('sequelize');
 const table = require('./db');
 const websiteModel = require('./website');
 const columnsModel = require('./columns');
-const Articles = table.define('public_api_articles',{
+const Articles = table.define('public_api_articles', {
     article_id: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -10,7 +10,7 @@ const Articles = table.define('public_api_articles',{
         primaryKey: true,
         unique: 'column'
     },
-    
+
     title: {
         type: DataTypes.STRING(128),
         allowNull: false
@@ -39,7 +39,7 @@ const Articles = table.define('public_api_articles',{
     }
 
 
-},{
+}, {
     freezeTableName: true,
     paranoid: true,
     timestamps: true,

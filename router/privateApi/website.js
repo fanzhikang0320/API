@@ -4,7 +4,7 @@ const { createWebsite, updateWebsite, selectWebsite, selectAllWebsite } = requir
 
 const { success, fail } = require('../response');
 const authMiddleware = require('../../middleware/auth');
-websiteRouter.post('/add',authMiddleware, async (req, res) => {
+websiteRouter.post('/add', authMiddleware, async (req, res) => {
     let { website } = req.body;
 
     let results = await createWebsite(website);
@@ -17,9 +17,9 @@ websiteRouter.post('/add',authMiddleware, async (req, res) => {
 
 })
 
-websiteRouter.put('/update',authMiddleware, async (req, res) => {
+websiteRouter.put('/update', authMiddleware, async (req, res) => {
     const { website_id, website } = req.body;
-    
+
     let results = await updateWebsite(website_id, { website });
 
     if (results === 'error') {
@@ -32,7 +32,7 @@ websiteRouter.put('/update',authMiddleware, async (req, res) => {
 websiteRouter.get('/', async (req, res) => {
     let { page, limit } = req.query;
 
-    
+
     page = isNaN(Number(page)) ? 0 : Number(page);
     limit = isNaN(Number(limit)) ? 20 : Number(limit);
 
@@ -41,14 +41,14 @@ websiteRouter.get('/', async (req, res) => {
     if (results === 'error') {
         fail(res, 5000, '查询失败，请联系程序员')
     } else {
-        
+
         success(res, results, '查询成功')
     }
 })
 
 
 websiteRouter.get('/all', async (req, res) => {
-   
+
     let results = await selectAllWebsite();
 
     if (results === 'error') {

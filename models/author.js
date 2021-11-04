@@ -2,7 +2,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 const table = require('./db');
 
 
-const Author = table.define('public_api_author',{
+const Author = table.define('public_api_author', {
     author_id: {
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -20,8 +20,8 @@ const Author = table.define('public_api_author',{
     avatar: {
         type: DataTypes.STRING(128)
     }
-  
-},{
+
+}, {
     freezeTableName: true,
     paranoid: true,
     timestamps: true,

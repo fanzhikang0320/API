@@ -21,11 +21,11 @@ app.use(cors())
 app.engine('art', expressArtTemplate);
 app.set('views', {
     htmlMinifier: {
-      collapseWhitespace: true,
-      minifyCSS: true,
-      minifyJS: true,
-      removeComments: true
-  },
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: true
+    },
     debug: process.env.NODE_ENV !== 'production'
 });
 app.set('views', path.join(__dirname, 'views/pages'));
@@ -40,29 +40,29 @@ app.use(sassMiddleware({
     sourceMap: false,
     prefix: '/stylesheets'
 }));
-const {signRouter, smsRouter, websiteRouter, pageRouter, uploadRouter, columnsRouter, articleRouter, authorRouter, ckeditorRouter } = require('./router');
+const { signRouter, smsRouter, websiteRouter, pageRouter, uploadRouter, columnsRouter, articleRouter, authorRouter, ckeditorRouter } = require('./router');
 const authMiddleware = require('./middleware/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/sign',signRouter);
-app.use('/sms',smsRouter);
+app.use('/sign', signRouter);
+app.use('/sms', smsRouter);
 app.use('/articles', articleRouter);
 app.use('/website', websiteRouter);
 app.use('/upload', uploadRouter);
-app.use('/columns', columnsRouter )
+app.use('/columns', columnsRouter)
 app.use('/author', authorRouter);
-app.use('/uploader',ckeditorRouter);
-app.use('/',authMiddleware,pageRouter);
+app.use('/uploader', ckeditorRouter);
+app.use('/', authMiddleware, pageRouter);
 
 // 渲染404页面
 app.use((req, res) => {
     res.render('error', { title: '404 NOT FOUND' })
 })
-app.listen(port,host,() => {
+app.listen(port, host, () => {
     console.log('start');
 })

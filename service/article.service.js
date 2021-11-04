@@ -8,7 +8,7 @@ const { sqlLogger } = require('../common/logger');
 /**
  * 创建一篇文章
  */
-const createArticle = async ({ website_id, columns_id, keywords, title, subtitle, introduce, content, main_picture, state, author_id , date}) => {
+const createArticle = async ({ website_id, columns_id, keywords, title, subtitle, introduce, content, main_picture, state, author_id, date }) => {
     try {
         const results = await sequelize.transaction(async (t) => {
 
@@ -19,18 +19,18 @@ const createArticle = async ({ website_id, columns_id, keywords, title, subtitle
                 title,
                 subtitle,
                 introduce,
-                content, 
-                main_picture, 
-                state, 
+                content,
+                main_picture,
+                state,
                 date,
-                author_id 
-            },{ transaction: t });
+                author_id
+            }, { transaction: t });
 
             return ins.toJSON();
         })
 
         return results;
-        
+
     } catch (error) {
         sqlLogger.error(error);
         return 'error'
@@ -98,12 +98,12 @@ const deleteArticle = async (article_id) => {
  * @param {*} page 
  * @param {*} limit
  */
-const selectAllArticle = async (website_id, page=1, limit=20, status) => {
+const selectAllArticle = async (website_id, page = 1, limit = 20, status) => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await articleModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version','content']
+                    exclude: ['version', 'content']
                 },
                 include: [{
                     model: columnsModel,
@@ -148,13 +148,13 @@ const selectAllArticle = async (website_id, page=1, limit=20, status) => {
  * @param {*} page 
  * @param {*} limit
  */
-const selectArticleByColumnsID = async (columns_id, page=1, limit=20, status) => {
+const selectArticleByColumnsID = async (columns_id, page = 1, limit = 20, status) => {
 
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await articleModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version','content']
+                    exclude: ['version', 'content']
                 },
 
                 offset: (page - 1) * limit,

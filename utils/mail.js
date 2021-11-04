@@ -5,7 +5,7 @@ const mailSecure = process.env.MAIL_SECURE;
 const mailUser = process.env.MAIL_USER;
 const mailPass = process.env.MAIL_PASS;
 
-async function mail(name,to,subject,text,callback) {
+async function mail(name, to, subject, text, callback) {
     // 发件人配置
     const transporterConf = {
         host: mailHost,
@@ -28,7 +28,7 @@ async function mail(name,to,subject,text,callback) {
     }
     let transporter = await nodemailer.createTransport(transporterConf);
 
-    let info = await transporter.sendMail(messageConf,(err) => {
+    let info = await transporter.sendMail(messageConf, (err) => {
         callback(err);
     });
 

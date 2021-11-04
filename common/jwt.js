@@ -3,7 +3,7 @@ const secret = 'jyd521'
 // 生成方法---data是自定义信息，exp是传的过期时间
 let createToken = function (data, exp) {
   let obj = {};
-  obj.data = data ? data : null; 
+  obj.data = data ? data : null;
   obj.type = 'jsonwebtoken'; // 加个类型哈哈
   obj.ctime = new Date().getTime(); //token的创建时间
   // 用expiresIn就不用，直接设置过期时间

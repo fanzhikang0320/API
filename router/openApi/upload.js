@@ -11,7 +11,7 @@ router.post('/', uploadMiddle, (req, res) => {
     let filesArray = req.files;
     let pathArray = [];
 
-    filesArray.forEach( file => {
+    filesArray.forEach(file => {
         let { filename, mimetype, size } = file;
 
         let data = {
@@ -23,7 +23,7 @@ router.post('/', uploadMiddle, (req, res) => {
         pathArray.push(data)
     })
 
-    
+
     success(res, pathArray, '上传成功')
 })
 

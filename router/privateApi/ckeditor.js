@@ -15,9 +15,9 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         let suffixArray = file.originalname.split('.');
         let ext = suffixArray[suffixArray.length - 1];
-        cb(null, new Date().getTime() + '.' + ext );
+        cb(null, new Date().getTime() + '.' + ext);
     }
-    
+
 })
 
 // 定制过滤器
@@ -29,21 +29,21 @@ const fileFilter = (req, file, cb) => {
 
         cb(new Error('不支持的图片类型')) //发送错误
     }
-    
+
 }
-const upload = multer({ 
+const upload = multer({
     storage: storage,
     limits: {
         fileSize: fileSize * 1024, //10Mb大小
         files: maxCount // 最多上传10个文件
     },
     fileFilter: fileFilter
- })
+})
 
- const uploader = upload.single('upload')
+const uploader = upload.single('upload')
 
 router.post('/', (req, res) => {
-    uploader (req, res, (err) => {
+    uploader(req, res, (err) => {
         if (err instanceof multer.MulterError) {
             // 发生错误
             fail(res, 5000, 'Multer Error: ' + err, 500);
@@ -55,9 +55,9 @@ router.post('/', (req, res) => {
             let { filename, path } = req.file;
             res.send({ fileName: filename, uploaded: 1, url: process.env.PATH_PREFIX + '/upload/images/articles/' + filename })
         }
-        
+
     })
-} )
+})
 
 
 

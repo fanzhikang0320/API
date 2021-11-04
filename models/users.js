@@ -29,7 +29,7 @@ const Users = table.define('public_api_users', {
         defaultValue: '/public/upload/default_avatar.jpg'
     }
 
-},{
+}, {
     freezeTableName: true,
     paranoid: true,
     timestamps: true,

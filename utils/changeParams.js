@@ -13,7 +13,7 @@ module.exports = (notKey, object) => {
             if (key !== notKey) {
                 params[key] = object[key];
             }
-            
+
         }
     }
 

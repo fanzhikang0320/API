@@ -14,9 +14,9 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         let suffixArray = file.originalname.split('.');
         let ext = suffixArray[suffixArray.length - 1];
-        cb(null, new Date().getTime() + '.' + ext );
+        cb(null, new Date().getTime() + '.' + ext);
     }
-    
+
 })
 
 // 定制过滤器
@@ -28,7 +28,7 @@ const fileFilter = (req, file, cb) => {
 
         cb(new Error('不支持的图片类型')) //发送错误
     }
-    
+
 }
 
 

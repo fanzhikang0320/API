@@ -17,11 +17,11 @@ router.get('/find', async (req, res) => {
         } else {
             success(res, results, '查询成功')
         }
-        
+
     }
 })
 
-router.get('/all', async (req,res) => {
+router.get('/all', async (req, res) => {
     let { page, limit } = req.query;
     page = isNaN(Number(page)) ? 1 : Number(page);
     limit = isNaN(Number(limit)) ? 20 : Number(limit);
@@ -58,13 +58,13 @@ router.put('/update', authMiddleware, async (req, res) => {
         } else {
             success(res, results, '更新成功')
         }
-       
+
     }
 
 })
 
 
-router.delete('/delete',authMiddleware, async (req, res) => {
+router.delete('/delete', authMiddleware, async (req, res) => {
     let { author_id } = req.body;
 
     let results = await deleteAuthor(author_id);
@@ -76,11 +76,11 @@ router.delete('/delete',authMiddleware, async (req, res) => {
         } else {
             success(res, results, '删除成功')
         }
-        
-    }
-})  
 
-router.post('/create',authMiddleware, async (req, res) => {
+    }
+})
+
+router.post('/create', authMiddleware, async (req, res) => {
     let { avatar, name, introduce } = req.body;
 
     let results = await createAuthor({ avatar, name, introduce });
@@ -89,7 +89,7 @@ router.post('/create',authMiddleware, async (req, res) => {
     } else {
         success(res, results, '添加成功')
     }
-    
+
 })
 
 

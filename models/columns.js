@@ -15,7 +15,7 @@ const Columns = table.define('public_api_columns', {
         defaultValue: '默认栏目'
     }
 
-},{
+}, {
     freezeTableName: true,
     paranoid: true,
     timestamps: true,

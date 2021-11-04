@@ -6,7 +6,7 @@
 
 {{block 'page'}}
 <form class="layui-form" id="articles-form" lay-filter="edit-form-filter">
-              
+
     <div class="layui-form-item layui-col-lg3">
         <lable class="layui-form-label">* 所属栏目</lable>
         <div class="layui-input-block">
@@ -22,14 +22,16 @@
                 <i class="layui-icon">&#xe67c;</i>上传图片
             </button>
         </div>
-        <img src="" alt="" height="100px"  style="margin-left: 110px; margin-top: 15px; max-width: 500px; display: none" id="currentImage">
-        
+        <img src="" alt="" height="100px" style="margin-left: 110px; margin-top: 15px; max-width: 500px; display: none"
+            id="currentImage">
+
     </div>
     <div class="layui-form-item layui-col-lg5">
 
         <label class="layui-form-label">* 主标题</label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="required" placeholder="请输入文章标题" autocomplete="off" class="layui-input">
+            <input type="text" name="title" lay-verify="required" placeholder="请输入文章标题" autocomplete="off"
+                class="layui-input">
         </div>
     </div>
     <div class="layui-form-item layui-col-lg5">
@@ -65,7 +67,7 @@
             </select>
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <label class="layui-form-label">发布日期</label>
         <div class="layui-input-block">
@@ -74,12 +76,12 @@
             </div>
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" type="button" lay-submit lay-filter="submitArticleDrafts">保存至草稿箱</button>
             <button class="layui-btn layui-btn-normal" type="button" lay-submit lay-filter="submitArticle">立即发布</button>
-            <button class="layui-btn layui-btn-primary reset-btn" lay-submit lay-filter="resetArticle" >重置</button>
+            <button class="layui-btn layui-btn-primary reset-btn" lay-submit lay-filter="resetArticle">重置</button>
         </div>
     </div>
 </form>

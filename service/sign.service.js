@@ -33,7 +33,7 @@ const selectUserByAccount = async (account) => {
  * @param {*} avatar 
  * @returns 
  */
-const createUser = async (account,pwd,nickname,avatar) => {
+const createUser = async (account, pwd, nickname, avatar) => {
 
     try {
         const result = await sequelize.transaction(async (t) => {
@@ -44,13 +44,13 @@ const createUser = async (account,pwd,nickname,avatar) => {
                 nickname: nickname,
                 avatar: avatar
 
-            },{ transaction: t });
+            }, { transaction: t });
 
             return ins.toJSON();
         })
         return result;
     } catch (error) {
-        
+
         sqlLogger.error(error);
         return 'error';
     }
@@ -66,8 +66,8 @@ const updateUser = async (account, { ...params }) => {
     try {
         const result = await sequelize.transaction(async (t) => {
             const ins = await Users.update({
-                ...params    
-            },{
+                ...params
+            }, {
                 where: {
                     account: account
                 },
@@ -77,7 +77,7 @@ const updateUser = async (account, { ...params }) => {
         })
         return result;
     } catch (error) {
-        
+
         sqlLogger.error(error);
         return 'error'
     }

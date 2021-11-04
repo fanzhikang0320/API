@@ -60,7 +60,7 @@ module.exports = {
     }, maxAge * 60 * 1000)
     return code
   },
-  
+
   /**
    * 验证代码是否正确
    * @param phone 需要验证的手机号码

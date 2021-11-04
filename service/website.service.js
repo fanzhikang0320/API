@@ -1,134 +1,137 @@
-const sequelize = require('../models/db');
+const sequelize = require("../models/db");
 
-const WebsiteModel = require('../models/website');
-const { sqlLogger } = require('../common/logger');
+const WebsiteModel = require("../models/website");
+const { sqlLogger } = require("../common/logger");
 
 /**
  * 添加一个网站
- * @param {*} website 
- * @returns 
+ * @param {*} website
+ * @returns
  */
 const createWebsite = async (website) => {
     try {
         const results = await sequelize.transaction(async (t) => {
-
-            const ins = await WebsiteModel.create({
-                website: website
-
-            },{ transaction: t });
+            const ins = await WebsiteModel.create(
+                {
+                    website: website,
+                },
+                { transaction: t }
+            );
 
             return ins.toJSON();
-        })
+        });
 
         return results;
-        
     } catch (error) {
         sqlLogger.error(error);
-        return 'error'
+        return "error";
     }
-}
+};
 
 /**
  * 更新一个网站
- * @param {*} website_id 
- * @param {*} param1 
- * @returns 
+ * @param {*} website_id
+ * @param {*} param1
+ * @returns
  */
 const updateWebsite = async (website_id, params) => {
     try {
         const results = await sequelize.transaction(async (t) => {
-            const ins = await WebsiteModel.update({
-                ...params
-            }, {
-                where: {
-                    website_id: website_id
+            const ins = await WebsiteModel.update(
+                {
+                    ...params,
                 },
-                transaction: t
-            });
+                {
+                    where: {
+                        website_id: website_id,
+                    },
+                    transaction: t,
+                }
+            );
             return ins;
-        })
+        });
         return results;
     } catch (error) {
         sqlLogger.error(error);
-        return 'error'
+        return "error";
     }
-}
+};
 
 /**
  * 分页查询网站
- * @param {*} limit 
- * @param {*} offset 
- * @returns 
+ * @param {*} limit
+ * @param {*} offset
+ * @returns
  */
-const selectWebsite = async (page=1, limit=20) => {
+const selectWebsite = async (page = 1, limit = 20) => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await WebsiteModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version']
+                    exclude: ["version"],
                 },
 
                 offset: (page - 1) * limit,
                 limit: limit,
-                transaction: t
+                transaction: t,
             });
 
             return ins;
-        })
+        });
         return results;
     } catch (error) {
         sqlLogger.error(error);
-        return 'error';
+        return "error";
     }
-}
+};
 
 /**
  * 查询所有网站
- * @returns 
+ * @returns
  */
 const selectAllWebsite = async () => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await WebsiteModel.findAll({
-                transaction: t
+                transaction: t,
             });
 
             return ins;
-        })
+        });
         return results;
     } catch (error) {
         sqlLogger.error(error);
-        return 'error';
+        return "error";
     }
-}
+};
 
 /**
  * 查询某个网站信息
- * @param {*} website_id 
+ * @param {*} website_id
  */
 const selectOneWebsite = async (website_id) => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await WebsiteModel.findOne({
                 where: {
-                    website_id: website_id
+                    website_id: website_id,
                 },
-                transaction: t
+                transaction: t,
             });
 
             return ins;
-        })
+        });
         return results;
     } catch (error) {
         sqlLogger.error(error);
-        return 'error';
+        return "error";
     }
-}
+};
 
 module.exports = {
     createWebsite,
     updateWebsite,
     selectWebsite,
     selectAllWebsite,
-    selectOneWebsite
-}
+    selectOneWebsite,
+};

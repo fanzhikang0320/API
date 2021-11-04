@@ -11,29 +11,29 @@ const authMiddleware = require('../../middleware/auth');
 
 const middleware = async (req, res, next) => {
 
-    let {columns_id, website_id} = req.body;
+    let { columns_id, website_id } = req.body;
 
     let websiteResults = await selectOneWebsite(website_id);
     if (websiteResults === 'error') {
         fail(res, 5000, '查询网站信息失败', 500);
-        return ;
+        return;
     }
 
     let columnsResults = await selectOneColumns(columns_id);
 
     if (columnsResults === 'error') {
         fail(res, 5000, '查询栏目信息失败', 500);
-        return ;
+        return;
     }
 
     if (!websiteResults) {
         fail(res, 4040, '未找到相关网站！请添加后再试！');
-        return ;
+        return;
     } else if (!columnsResults) {
         fail(res, 4040, '未找到相关栏目信息！请添加后再试！');
-        return ;
+        return;
     }
-    
+
 
     next();
 }
@@ -90,20 +90,20 @@ router.get('/findbycolumns', async (req, res) => {
     } else {
         success(res, results, '查询成功')
     }
-        
-    
+
+
 })
 
 /**
  * 创建一篇文章
  */
-router.post('/create',authMiddleware, middleware, async (req, res) => {
+router.post('/create', authMiddleware, middleware, async (req, res) => {
     if (req.body.state != 'fail' && req.body.state != 'pending' && req.body.state != 'done') {
         req.body.state = 'done'
     }
     let results = await createArticle(req.body);
     if (results === 'error') {
-        fail(res,5000, '创建文章失败')
+        fail(res, 5000, '创建文章失败')
     } else {
         success(res, results, '创建成功')
     }
@@ -112,7 +112,7 @@ router.post('/create',authMiddleware, middleware, async (req, res) => {
 /**
  * 更新一篇文章
  */
-router.put('/update', authMiddleware,  async (req, res) => {
+router.put('/update', authMiddleware, async (req, res) => {
     let { article_id } = req.body;
     let params = changeParams('article_id', req.body);
     let results = await updateArticle(article_id, params);
@@ -124,8 +124,8 @@ router.put('/update', authMiddleware,  async (req, res) => {
     } else {
         fail(res, 4040, '未找到该篇文章')
     }
-        
-    
+
+
 })
 
 /**
@@ -138,11 +138,11 @@ router.delete('/delete', authMiddleware, async (req, res) => {
 
     if (results === 'error') {
         fail(res, 5000, '删除文章失败')
-    } 
+    }
     else if (results[0] == 0) {
-        fail(res,4040, '未找到该篇文章')
-        
-    } 
+        fail(res, 4040, '未找到该篇文章')
+
+    }
     else {
         success(res, results, '删除文章成功')
     }

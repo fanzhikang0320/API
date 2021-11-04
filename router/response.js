@@ -1,6 +1,6 @@
 
 module.exports = {
-    success: (res,data,msg="success",field={}, status=200) => {
+    success: (res, data, msg = "success", field = {}, status = 200) => {
         res.status(status).send({
             code: 1,
             msg: msg,
@@ -9,7 +9,7 @@ module.exports = {
             status: 'success'
         })
     },
-    fail: (res,code,msg="fail",status=200) => {
+    fail: (res, code, msg = "fail", status = 200) => {
         res.status(status).send({
             code: code,
             msg: msg,

@@ -23,13 +23,13 @@ function renderMD(req, res, templatePath, filename, title) {
     })
 }
 
-router.get('/',(req, res) => {
+router.get('/', (req, res) => {
     let userInfo = req.headers.userInfo;
-    res.render('index',{ title: 'API', userInfo });
+    res.render('index', { title: 'API', userInfo });
 })
 
-router.get('/login',(req, res) => {
-    res.render('login',{ title: '登录 - Open API' })
+router.get('/login', (req, res) => {
+    res.render('login', { title: '登录 - Open API' })
 })
 
 router.get('/edit-page', (req, res) => {
@@ -62,19 +62,19 @@ router.get('/article-deleted', (req, res) => {
 })
 
 router.get('/documents/email', (req, res) => {
-    
-    
+
+
     renderMD(req, res, './documents/email', 'Email.md', '邮件API文档 - Open API')
-    
+
 })
 router.get('/documents/article', (req, res) => {
-   
-    renderMD(req,res, './documents/article','Articles.md', '文章API文档 - Open API' )
+
+    renderMD(req, res, './documents/article', 'Articles.md', '文章API文档 - Open API')
 })
 
 router.get('/documents/upload', (req, res) => {
-    
-    renderMD(req, res, './documents/upload','Upload.md', '上传API文档 - Open API')
+
+    renderMD(req, res, './documents/upload', 'Upload.md', '上传API文档 - Open API')
 })
 
 router.get('/websites', (req, res) => {

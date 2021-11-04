@@ -12,10 +12,10 @@ authorModel.hasMany(articleModel, { foreignKey: 'author_id' });
 articleModel.belongsTo(authorModel, { foreignKey: 'author_id' });
 
 websiteModel.hasMany(articleModel, { foreignKey: 'website_id', sourceKey: 'website_id' });
-articleModel.belongsTo(websiteModel, { foreignKey: 'website_id', targetKey: 'website_id'});
+articleModel.belongsTo(websiteModel, { foreignKey: 'website_id', targetKey: 'website_id' });
 
 columnsModel.hasMany(articleModel, { foreignKey: 'columns_id', sourceKey: 'columns_id' });
-articleModel.belongsTo(columnsModel, { foreignKey: 'columns_id', targetKey: 'columns_id'});
+articleModel.belongsTo(columnsModel, { foreignKey: 'columns_id', targetKey: 'columns_id' });
 
 // 同步所有数据表模型
 Sequelize.sync({

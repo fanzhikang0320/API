@@ -3,10 +3,12 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link href="/stylesheets/login.css" rel="stylesheet" type="text/css">
-    
+
 </head>
 
 <body>
@@ -24,9 +26,11 @@
             <img src="/upload/images/avatar.png" style="width: 70px; border-radius: 12px;">
         </div>
         <form>
-            <input type="text" class="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}">
+            <input type="text" class="username" value="Username" onfocus="this.value = '';"
+                onblur="if (this.value == '') {this.value = 'Username';}">
             <div class="key">
-                <input class="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
+                <input class="password" type="password" value="Password" onfocus="this.value = '';"
+                    onblur="if (this.value == '') {this.value = 'Password';}">
             </div>
         </form>
         <div class="signin">

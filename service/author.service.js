@@ -17,13 +17,13 @@ const createAuthor = async ({ name, introduce, avatar }) => {
                 name,
                 introduce,
                 avatar
-            },{ transaction: t });
+            }, { transaction: t });
 
             return ins.toJSON();
         })
 
         return results;
-        
+
     } catch (error) {
         sqlLogger.error(error);
         return 'error'
@@ -55,7 +55,7 @@ const deleteAuthor = async (author_id) => {
         const result = await sequelize.transaction(async (t) => {
             const ins = await authorModel.destroy({
                 where: {
-                   author_id: author_id
+                    author_id: author_id
                 },
                 transaction: t
             });
@@ -87,7 +87,7 @@ const selectAuthorInfo = async (author_id) => {
     }
 }
 
-const selectAllAuthorForPaging = async (page=1, limit=20) => {
+const selectAllAuthorForPaging = async (page = 1, limit = 20) => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await authorModel.findAndCountAll({
@@ -113,7 +113,7 @@ const selectAllAuthor = async () => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await authorModel.findAll({
-                
+
                 transaction: t
             });
 
@@ -121,7 +121,7 @@ const selectAllAuthor = async () => {
         })
         return results;
     } catch (error) {
-        
+
         sqlLogger.error(error);
         return 'error';
     }

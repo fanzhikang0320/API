@@ -19,13 +19,13 @@ const createColumns = async (website_id, title) => {
                 website_id: website_id,
                 title: title
 
-            },{ transaction: t });
+            }, { transaction: t });
 
             return ins.toJSON();
         })
         return results;
     } catch (error) {
-        
+
         sqlLogger.error(error);
         return 'error';
     }
@@ -41,8 +41,8 @@ const updateColumns = async (columns_id, params) => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await ColumnsModel.update({
-                ...params    
-            },{
+                ...params
+            }, {
                 where: {
                     columns_id: columns_id
                 },
@@ -52,7 +52,7 @@ const updateColumns = async (columns_id, params) => {
         })
         return results;
     } catch (error) {
-        
+
         sqlLogger.error(error);
         return 'error'
     }
@@ -76,7 +76,7 @@ const selectAllColumns = async (website_id) => {
         })
         return results;
     } catch (error) {
-        
+
         sqlLogger.error(error);
         return 'error';
     }

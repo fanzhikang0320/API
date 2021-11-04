@@ -8,12 +8,12 @@ const { varifyToken } = require('../common/jwt');
  * @param {*} next 
  */
 
-module.exports = function (req,res,next) {
+module.exports = function (req, res, next) {
     const { pathname } = req._parsedUrl;
     const routerWhiteList = JSON.parse(process.env.ROUTER_WHITELIST);
 
     let results = varifyToken(req.cookies.token);
-    
+
     if (routerWhiteList.includes(pathname)) {
         next()
     } else if (results.code != 4030) {

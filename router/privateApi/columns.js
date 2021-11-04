@@ -14,11 +14,11 @@ router.post('/create', authMiddleware, async (req, res) => {
     if (results === 'error') {
         fail(res, 5000, '添加栏目失败')
     } else {
-        success(res, results, '添加栏目成功' )
+        success(res, results, '添加栏目成功')
     }
 })
 
-router.put('/update',authMiddleware, async (req, res) => {
+router.put('/update', authMiddleware, async (req, res) => {
     let { columns_id } = req.body;
     let params = changeParmas('columns_id', req.body);
 

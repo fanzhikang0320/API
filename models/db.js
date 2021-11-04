@@ -6,7 +6,7 @@ const port = process.env.DATABASE_PORT;
 const dialect = process.env.DATABASE_DIALECT;
 const name = process.env.DATABASE_NAME;
 const { sqlLogger } = require('../common/logger');
-module.exports = new Sequelize(name,user,pwd,{
+module.exports = new Sequelize(name, user, pwd, {
     host: host,
     port: port,
     dialect: dialect,
