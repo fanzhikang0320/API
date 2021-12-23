@@ -1,14 +1,26 @@
 const sequelize = require('../models/db');
-
+const {Op} = require('sequelize');
 const articleModel = require('../models/article');
 const columnsModel = require('../models/columns');
 const websiteModel = require('../models/website');
 const authorModel = require('../models/author');
-const { sqlLogger } = require('../common/logger');
+const {sqlLogger} = require('../common/logger');
 /**
  * 创建一篇文章
  */
-const createArticle = async ({ website_id, columns_id, keywords, title, subtitle, introduce, content, main_picture, state, author_id , date}) => {
+const createArticle = async ({
+                                 website_id,
+                                 columns_id,
+                                 keywords,
+                                 title,
+                                 subtitle,
+                                 introduce,
+                                 content,
+                                 main_picture,
+                                 state,
+                                 author_id,
+                                 date
+                             }) => {
     try {
         const results = await sequelize.transaction(async (t) => {
 
@@ -19,18 +31,18 @@ const createArticle = async ({ website_id, columns_id, keywords, title, subtitle
                 title,
                 subtitle,
                 introduce,
-                content, 
-                main_picture, 
-                state, 
+                content,
+                main_picture,
+                state,
                 date,
-                author_id 
-            },{ transaction: t });
+                author_id
+            }, {transaction: t});
 
             return ins.toJSON();
         })
 
         return results;
-        
+
     } catch (error) {
         sqlLogger.error(error);
         return 'error'
@@ -39,9 +51,9 @@ const createArticle = async ({ website_id, columns_id, keywords, title, subtitle
 
 /**
  * 更新某篇文章内容
- * @param {*} article_id 
- * @param {*} params 
- * @returns 
+ * @param {*} article_id
+ * @param {*} params
+ * @returns
  */
 const updateArticle = async (article_id, params) => {
     try {
@@ -65,9 +77,9 @@ const updateArticle = async (article_id, params) => {
 
 /**
  * 根据某篇文章id删除某篇文章
- * 
+ *
  * 修改该篇文章的状态
- * @param {*} article_id 
+ * @param {*} article_id
  */
 const deleteArticle = async (article_id) => {
     try {
@@ -94,16 +106,16 @@ const deleteArticle = async (article_id) => {
 
 /**
  * 分页查询该网站下的所有的文章
- * @param {*} website_id 
- * @param {*} page 
+ * @param {*} website_id
+ * @param {*} page
  * @param {*} limit
  */
-const selectAllArticle = async (website_id, page=1, limit=20, status) => {
+const selectAllArticle = async (website_id, page = 1, limit = 20, status) => {
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await articleModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version','content']
+                    exclude: ['version', 'content']
                 },
                 include: [{
                     model: columnsModel,
@@ -111,18 +123,18 @@ const selectAllArticle = async (website_id, page=1, limit=20, status) => {
                         'title'
                     ]
                 },
-                {
-                    model: websiteModel,
-                    attributes: [
-                        'website'
-                    ]
-                },
-                {
-                    model: authorModel,
-                    attributes: [
-                        'name'
-                    ]
-                }
+                    {
+                        model: websiteModel,
+                        attributes: [
+                            'website'
+                        ]
+                    },
+                    {
+                        model: authorModel,
+                        attributes: [
+                            'name'
+                        ]
+                    }
                 ],
                 offset: (page - 1) * limit,
                 limit: limit,
@@ -144,17 +156,17 @@ const selectAllArticle = async (website_id, page=1, limit=20, status) => {
 
 /**
  * 根据栏目ID查询该栏目下的所有文章
- * @param {*} columns_id 
- * @param {*} page 
+ * @param {*} columns_id
+ * @param {*} page
  * @param {*} limit
  */
-const selectArticleByColumnsID = async (columns_id, page=1, limit=20, status) => {
+const selectArticleByColumnsID = async (columns_id, page = 1, limit = 20, status) => {
 
     try {
         const results = await sequelize.transaction(async (t) => {
             const ins = await articleModel.findAndCountAll({
                 attributes: {
-                    exclude: ['version','content']
+                    exclude: ['version', 'content']
                 },
 
                 offset: (page - 1) * limit,
@@ -177,7 +189,7 @@ const selectArticleByColumnsID = async (columns_id, page=1, limit=20, status) =>
 
 /**
  * 根据文章id获取文章详细内容
- * @param {*} article_id 
+ * @param {*} article_id
  */
 const selectArticleByArticleID = async (article_id) => {
     try {
@@ -201,11 +213,41 @@ const selectArticleByArticleID = async (article_id) => {
     }
 }
 
+/**
+ * @description 根据文章标题查询文章
+ * @param title
+ * @returns {Promise<unknown>}
+ */
+const selectArticleByTitle = async (title) => {
+    try {
+        const results = await sequelize.transaction(async (t) => {
+            const ins = await articleModel.findOne({
+                attributes: {
+                    exclude: ['version']
+                },
+                where: {
+                    title: {
+                        [Op.like]: '%' + title + '%'
+                    }
+        },
+                transaction: t
+            });
+
+            return ins;
+        })
+        return results;
+    } catch (error) {
+        sqlLogger.error(error);
+        return 'error';
+    }
+}
+
 module.exports = {
     createArticle,
     selectAllArticle,
     selectArticleByColumnsID,
     selectArticleByArticleID,
+    selectArticleByTitle,
     deleteArticle,
     updateArticle
 }

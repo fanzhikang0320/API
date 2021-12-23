@@ -1,4 +1,4 @@
-const { DataTypes, Sequelize } = require('sequelize');
+const {DataTypes, Sequelize} = require('sequelize');
 const table = require('./db');
 
 
@@ -29,7 +29,7 @@ const Users = table.define('public_api_users', {
         defaultValue: '/public/upload/default_avatar.jpg'
     }
 
-},{
+}, {
     freezeTableName: true,
     paranoid: true,
     timestamps: true,

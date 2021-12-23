@@ -1,4 +1,3 @@
-
 const dotenv = require('dotenv');
 dotenv.config();
 const path = require('path');
@@ -14,7 +13,7 @@ const host = process.env.SERVER_HOST;
 const sassMiddleware = require('node-sass-middleware');
 
 app.set('views', path.join(__dirname, 'views/pages'));
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 app.use(cors())
 // 注意：node-sass-middleware必须放在express.static前
 app.use(sassMiddleware({
@@ -25,29 +24,39 @@ app.use(sassMiddleware({
     sourceMap: false,
     prefix: '/stylesheets'
 }));
-const {signRouter, smsRouter, websiteRouter, pageRouter, uploadRouter, columnsRouter, articleRouter, authorRouter, ckeditorRouter } = require('./router');
+const {
+    signRouter,
+    smsRouter,
+    websiteRouter,
+    pageRouter,
+    uploadRouter,
+    columnsRouter,
+    articleRouter,
+    authorRouter,
+    ckeditorRouter
+} = require('./router');
 const authMiddleware = require('./middleware/auth');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/sign',signRouter);
-app.use('/sms',smsRouter);
+app.use('/sign', signRouter);
+app.use('/sms', smsRouter);
 app.use('/articles', articleRouter);
 app.use('/website', websiteRouter);
 app.use('/upload', uploadRouter);
-app.use('/columns', columnsRouter )
+app.use('/columns', columnsRouter)
 app.use('/author', authorRouter);
-app.use('/uploader',ckeditorRouter);
-app.use('/',authMiddleware,pageRouter);
+app.use('/uploader', ckeditorRouter);
+app.use('/', authMiddleware, pageRouter);
 
 // 渲染404页面
 app.use((req, res) => {
-    res.render('error', { title: '404 NOT FOUND' })
+    res.render('error', {title: '404 NOT FOUND'})
 })
-app.listen(port,host,() => {
+app.listen(port, host, () => {
     console.log('start');
 })
