@@ -227,9 +227,10 @@ const selectArticleByTitle = async (title) => {
                 },
                 where: {
                     title: {
-                        [Op.like]: '%' + title + '%'
-                    }
-        },
+                        [Op.like]: '%' + title + '%',
+                    },
+                    state: 'done'
+                },
                 transaction: t
             });
 
